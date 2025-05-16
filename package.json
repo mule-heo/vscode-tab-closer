@@ -1,0 +1,48 @@
+{
+  "name": "tab-closer",
+  "displayName": "Tab Closer",
+  "description": "Tab Closer closes inactive tabs and least recently used(LRU) tabs to help you stay focused.",
+  "version": "0.0.1",
+  "type": "module",
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "license": "MIT",
+  "publisher": "mule-heo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mule-heo/vscode-tab-closer"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "tab-closer.helloWorld",
+        "title": "Hello World"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "yarn run type-check && yarn run lint && node esbuild.js",
+    "watch:esbuild": "node --experimental-strip-types watch.ts --esbuild",
+    "watch:tsc": "node --experimental-strip-types watch.ts --tsc",
+    "watch": "node --experimental-strip-types watch.ts --esbuild --tsc",
+    "package": "yarn run type-check && yarn run lint && node esbuild.js --production",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src"
+  },
+  "devDependencies": {
+    "@types/node": "22.x",
+    "@types/vscode": "^1.100.0",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "esbuild": "^0.25.3",
+    "eslint": "^9.25.1",
+    "typescript": "^5.8.3"
+  },
+  "packageManager": "yarn@4.9.1"
+}
