@@ -22,6 +22,8 @@ No additional dependencies are required.
 
 This extension contributes the following settings:
 
+`tabCloser.enabled`: Determines whether the Tab Closer extension is active. When set to `true`, the extension will automatically close tabs based on the configured rules. Set to `false` to disable all automatic tab closing functionality.
+
 `tabCloser.inactiveTimeout`: Time in milliseconds after which an inactive tab will be closed.
 
 - Default: 300000 (5 minutes).
@@ -30,12 +32,24 @@ This extension contributes the following settings:
 
 - Default: 10.
 
-# Known Issues
+## How to Customize Settings
 
-Tabs with unsaved changes are never closed — even if inactive or over the tab limit.
+To customize these settings:
 
-Tabs opened by extensions or the terminal panel are not tracked or closed.
+1. Open Command Palette (Ctrl+Shift+P or Cmd+Shift+P on macOS).
+2. Type and select Preferences: Open Settings (JSON).
+3. Add or modify the tabCloser settings like this:
 
-# Release Notes
+```json
+{
+  "tabCloser.enabled": true,
+  "tabCloser.inactiveTimeout": 600000,
+  "tabCloser.maxTabs": 15
+}
+```
 
-To be updated.
+Save the file to apply your custom configuration.
+
+# License
+
+MIT License

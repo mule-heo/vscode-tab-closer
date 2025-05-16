@@ -2,7 +2,7 @@
   "name": "tab-closer",
   "displayName": "Tab Closer",
   "description": "Tab Closer closes inactive tabs and least recently used(LRU) tabs to help you stay focused.",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "type": "module",
   "engines": {
     "vscode": "^1.100.0"
@@ -16,13 +16,35 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "Tab Closer",
+      "properties": {
+        "tabCloser.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable automatic tab closing."
+        },
+        "tabCloser.inactiveTimeout": {
+          "type": "number",
+          "default": 300000,
+          "description": "Time in milliseconds after which an inactive tab will be closed."
+        },
+        "tabCloser.maxTabs": {
+          "type": "number",
+          "default": 10,
+          "description": "Maximum number of open tabs. If exceeded, the least recently used tab without unsaved changes will be closed."
+        }
+      }
+    },
     "commands": [
       {
-        "command": "tab-closer.helloWorld",
-        "title": "Hello World"
+        "command": "tabCloser.toggle",
+        "title": "Toggle: Tab Closer"
       }
     ]
   },
@@ -32,6 +54,7 @@
     "watch:tsc": "node --experimental-strip-types watch.ts --tsc",
     "watch": "node --experimental-strip-types watch.ts --esbuild --tsc",
     "package": "yarn run type-check && yarn run lint && node esbuild.js --production",
+    "package:vsce": "vsce package",
     "type-check": "tsc --noEmit",
     "lint": "eslint src"
   },
