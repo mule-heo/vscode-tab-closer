@@ -2,7 +2,7 @@
   "name": "tab-closer",
   "displayName": "Tab Closer",
   "description": "Tab Closer closes inactive tabs and least recently used(LRU) tabs to help you stay focused.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "engines": {
     "vscode": "^1.100.0"
@@ -29,10 +29,20 @@
           "default": true,
           "description": "Enable or disable automatic tab closing."
         },
+        "tabCloser.inactiveTimeoutEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable closing tabs based on inactivity period."
+        },
         "tabCloser.inactiveTimeout": {
           "type": "number",
           "default": 300000,
           "description": "Time in milliseconds after which an inactive tab will be closed."
+        },
+        "tabCloser.maxTabsEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable closing tabs based on a maximum number of open tabs."
         },
         "tabCloser.maxTabs": {
           "type": "number",
@@ -44,7 +54,23 @@
     "commands": [
       {
         "command": "tabCloser.toggle",
-        "title": "Toggle: Tab Closer"
+        "title": "Toggle Tab Closer"
+      },
+      {
+        "command": "tabCloser.toggleCloseInactiveTabs",
+        "title": "Toggle Close Inactive Tabs"
+      },
+      {
+        "command": "tabCloser.toggleCloseLeastRecentlyUsedTabs",
+        "title": "Toggle Close Least Recently Used Tabs"
+      },
+      {
+        "command": "tabCloser.closeInactiveTabs",
+        "title": "Run Close Inactive Tabs"
+      },
+      {
+        "command": "tabCloser.closeLeastRecentlyUsedTabs",
+        "title": "Run Close Least Recently Used Tabs"
       }
     ]
   },
@@ -54,7 +80,7 @@
     "watch:tsc": "node --experimental-strip-types watch.ts --tsc",
     "watch": "node --experimental-strip-types watch.ts --esbuild --tsc",
     "package": "yarn run type-check && yarn run lint && node esbuild.js --production",
-    "package:vsce": "vsce package",
+    "package:vsce": "vsce package --no-yarn",
     "type-check": "tsc --noEmit",
     "lint": "eslint src"
   },
